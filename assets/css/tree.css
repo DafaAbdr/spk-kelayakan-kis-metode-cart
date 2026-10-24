@@ -1,0 +1,169 @@
+/* Visualisasi Pohon Keputusan CART, murni CSS */
+
+.cart-tree-wrapper {
+  overflow-x: auto;
+  padding: 24px 8px 8px;
+}
+
+.cart-tree {
+  display: flex;
+  justify-content: center;
+  min-width: max-content;
+}
+
+.cart-tree ul {
+  padding-top: 28px;
+  position: relative;
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.cart-tree li {
+  flex: 1;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 28px 10px 0 10px;
+}
+
+/* Garis vertikal dari parent ke percabangan */
+.cart-tree > ul > li::before {
+  content: none;
+}
+
+.cart-tree li::before,
+.cart-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 28px;
+  border-top: 2px solid var(--tree-line-color, #b7c3d6);
+}
+
+.cart-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid var(--tree-line-color, #b7c3d6);
+}
+
+.cart-tree li:only-child::after,
+.cart-tree li:only-child::before {
+  display: none;
+}
+
+.cart-tree li:first-child::before,
+.cart-tree li:last-child::after {
+  border: 0 none;
+}
+
+.cart-tree li:last-child::before {
+  border-right: 2px solid var(--tree-line-color, #b7c3d6);
+  border-radius: 0 5px 0 0;
+}
+
+.cart-tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+.cart-tree ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 28px;
+  border-left: 2px solid var(--tree-line-color, #b7c3d6);
+}
+
+.tree-node {
+  display: inline-block;
+  min-width: 168px;
+  max-width: 220px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  border: 2px solid #dbe4ef;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(20, 30, 60, 0.06);
+  text-align: center;
+}
+
+.tree-node .tn-condition {
+  font-weight: 700;
+  color: #2c3e63;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.tree-node .tn-gini {
+  color: #6b7385;
+  font-size: 11px;
+}
+
+.tree-node .tn-dist {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #445;
+}
+
+.tree-node.tn-leaf {
+  border-color: #b7c3d6;
+}
+
+.tree-node.tn-leaf.tn-layak {
+  background: #eafaf1;
+  border-color: #34c38f;
+}
+
+.tree-node.tn-leaf.tn-tidak-layak {
+  background: #fdecec;
+  border-color: #e35d5d;
+}
+
+.tree-node.tn-leaf .tn-condition {
+  font-size: 13px;
+}
+
+.tree-node.tn-root {
+  border-color: #5b7fdb;
+  background: #eef2fd;
+}
+
+.tree-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  margin-top: 10px;
+}
+
+.tree-legend .legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .tree-node {
+  background: #1f2734;
+  border-color: #3a4356;
+  color: #e4e8f1;
+}
+[data-theme="dark"] .tree-node .tn-condition { color: #dfe6f8; }
+[data-theme="dark"] .tree-node .tn-gini,
+[data-theme="dark"] .tree-node .tn-dist { color: #a9b2c6; }
+[data-theme="dark"] .tree-node.tn-leaf.tn-layak { background: #163a2c; border-color: #34c38f; }
+[data-theme="dark"] .tree-node.tn-leaf.tn-tidak-layak { background: #3a1c1c; border-color: #e35d5d; }
+[data-theme="dark"] .cart-tree li::before,
+[data-theme="dark"] .cart-tree li::after,
+[data-theme="dark"] .cart-tree ul ul::before,
+[data-theme="dark"] .cart-tree li:last-child::before {
+  border-color: #3a4356;
+}
